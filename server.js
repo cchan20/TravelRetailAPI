@@ -23,17 +23,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
 });
 
-// Include routes of Purchase Request
-require("./routes/PurchaseRequest.routes.js")(app);
-
-// Include routes of Received Item Record
-require("./routes/ReceivedItemRecord.routes.js")(app);
-
-// Include routes of SendEmail
-require("./routes/SendEmail.routes.js")(app);
-
-// Include routes of SendEmail
-require("./routes/UploadDocument.routes.js")(app);
+// Include routes of Error List
+require("./routes/ErrorList.routes.js")(app);
 
 // Include routes of Audit Log
 require("./routes/AuditLog.routes.js")(app);

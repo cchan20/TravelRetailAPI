@@ -1,16 +1,16 @@
 const AuditLog = require("../models/AuditLog.model.js");
 
-// Retrieve all Audit Log from the database.
-exports.getSummary = (req, res) => {
-    AuditLog.getSummary(req.params.start_date, req.params.end_date, (err, data) => {
+// Retrieve Audit Log new error from the database.
+exports.getNewError = (req, res) => {
+    AuditLog.getNewError((err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found Audit Log Summary with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Not found Audit Log New Error.`
                 });
             } else {
                 res.status(500).send({
-                    message: `Error retrieving Audit Log Summary with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Error retrieving Audit Log New Error.`
                 });
             }
         } else res.send(data);

@@ -12,8 +12,8 @@ const AuditLog = function (request) {
   this.end_date = request.end_date;
 };
 
-AuditLog.getSummary = (start_date, end_date, result) => {
-  sql.query(`SELECT process_id, status, COUNT(DISTINCT(log_id)) AS 'count' FROM auditlog WHERE created_date BETWEEN "${start_date}" AND "${end_date}" GROUP BY status, process_id ORDER BY process_id;`, (err, res) => {
+AuditLog.getNewError = result => {
+  sql.query(`Select log_id, status, message from auditlog where log_id not in (Select log_id from TravelRetailErrorList) group by log_id`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
