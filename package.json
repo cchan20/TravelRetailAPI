@@ -1,0 +1,26 @@
+{
+  "name": "receiveitemapi",
+  "version": "1.0.0",
+  "description": "API for Explora DEMO 4  Receive Item and connect to MySQL database",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "restapi",
+    "mysql",
+    "express"
+  ],
+  "author": "Jason",
+  "license": "ISC",
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "mysql": "^2.17.1",
+    "node-uuid": "^1.4.8",
+    "nodemailer": "^6.4.2"
+  }
+}
