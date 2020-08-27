@@ -50,4 +50,23 @@ AuditLog.getAll = (start_date, end_date, result) => {
   });
 };
 
+AuditLog.getErrorCount = (start_date, end_date, result) => {
+  sql.query(`SELECT count(log_id), log_id, message FROM TravelRetail_demo.auditlog where log_id <> '0' and created_date between "${start_date}" AND "${end_date}" group by log_id`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("Audit Log: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Audit Log with date
+    result({ kind: "not_found" }, null);
+  });
+};
+
 module.exports = AuditLog;
