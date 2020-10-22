@@ -69,4 +69,80 @@ AuditLog.getErrorCount = (start_date, end_date, result) => {
   });
 };
 
+AuditLog.getHRMErrorCount = (start_date, end_date, result) => {
+  sql.query(`SELECT IncidentManagementDemo.errorLog.* from IncidentManagementDemo.errorLog inner Join ( SELECT  process_id,  count(1) from  HRMDemo.auditlog where HRMDemo.auditlog.status = 'error' and HRMDemo.auditlog.created_date between "${start_date}" AND "${end_date}" group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("Audit Log: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Audit Log with date
+    result({ kind: "not_found" }, null);
+  });
+};
+
+AuditLog.getCSErrorCount = (start_date, end_date, result) => {
+  sql.query(`SELECT IncidentManagementDemo.errorLog.* from IncidentManagementDemo.errorLog inner Join ( SELECT  process_id,  count(1) from  CustomerServiceDemo.auditlog where CustomerServiceDemo.auditlog.status = 'error' and CustomerServiceDemo.auditlog.created_date between "${start_date}" AND "${end_date}" group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("Audit Log: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Audit Log with date
+    result({ kind: "not_found" }, null);
+  });
+};
+
+AuditLog.getAMErrorCount = (start_date, end_date, result) => {
+  sql.query(`SELECT IncidentManagementDemo.errorLog.* from IncidentManagementDemo.errorLog inner Join ( SELECT  process_id,  count(1) from  InvoiceProcessingDemo.auditlog where InvoiceProcessingDemo.auditlog.status = 'error' and InvoiceProcessingDemo.auditlog.created_date between "${start_date}" AND "${end_date}" group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("Audit Log: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Audit Log with date
+    result({ kind: "not_found" }, null);
+  });
+};
+
+AuditLog.getRMErrorCount = (start_date, end_date, result) => {
+  sql.query(`SELECT IncidentManagementDemo.errorLog.* from IncidentManagementDemo.errorLog inner Join ( SELECT  process_id,  count(1) from  RevenueManagement.auditlog where RevenueManagement.auditlog.status = 'error' and RevenueManagement.auditlog.created_date between "${start_date}" AND "${end_date}" group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("Audit Log: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Audit Log with date
+    result({ kind: "not_found" }, null);
+  });
+};
+
 module.exports = AuditLog;
