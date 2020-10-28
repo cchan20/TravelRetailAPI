@@ -38,7 +38,7 @@ exports.getAll = (req, res) => {
     });
 };
 
-// Find a Audit Log Error count with a Date Period
+// Find a Audit Log Error count with a Duration
 exports.getErrorCount = (req, res) => {
     AuditLog.getErrorCount(req.params.start_date, req.params.end_date, (err, data) => {
         if (err) {
@@ -57,57 +57,57 @@ exports.getErrorCount = (req, res) => {
     });
 };
 
-// Find a HRM Audit Log Error count with a Date Period
+// Find a HRM Audit Log Error count with a Duration
 exports.getHRMErrorCount = (req, res) => {
-    AuditLog.getHRMErrorCount(req.params.start_date, req.params.end_date, (err, data) => {
+    AuditLog.getHRMErrorCount(req.params.duration, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
                     errorCode: `404`,
-                    message: `Not found HRM Audit Log with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Not found HRM Audit Log with Duration ${req.params.duration}.`
                 });
             } else {
                 res.status(500).send({
                     errorCode: `500`,
-                    message: `Error retrieving HRM Audit Log with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Error retrieving HRM Audit Log with Duration ${req.params.duration}.`
                 });
             }
         } else res.send(data);
     });
 };
 
-// Find a CS Audit Log Error count with a Date Period
+// Find a CS Audit Log Error count with a Duration
 exports.getCSErrorCount = (req, res) => {
-    AuditLog.getCSErrorCount(req.params.start_date, req.params.end_date, (err, data) => {
+    AuditLog.getCSErrorCount(req.params.duration, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
                     errorCode: `404`,
-                    message: `Not found CS Audit Log with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Not found CS Audit Log with Duration ${req.params.duration}.`
                 });
             } else {
                 res.status(500).send({
                     errorCode: `500`,
-                    message: `Error retrieving CS Audit Log with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Error retrieving CS Audit Log with Duration ${req.params.duration}.`
                 });
             }
         } else res.send(data);
     });
 };
 
-// Find a AM Audit Log Error count with a Date Period
+// Find a AM Audit Log Error count with a Duration
 exports.getAMErrorCount = (req, res) => {
-    AuditLog.getAMErrorCount(req.params.start_date, req.params.end_date, (err, data) => {
+    AuditLog.getAMErrorCount(req.params.duration, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
                     errorCode: `404`,
-                    message: `Not found AM Audit Log with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Not found AM Audit Log with Duration ${req.params.duration}.`
                 });
             } else {
                 res.status(500).send({
                     errorCode: `500`,
-                    message: `Error retrieving AM Audit Log with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Error retrieving AM Audit Log with Duration ${req.params.duration}.`
                 });
             }
         } else res.send(data);
@@ -116,17 +116,17 @@ exports.getAMErrorCount = (req, res) => {
 
 // Find a RM Audit Log Error count with a Date Period
 exports.getRMErrorCount = (req, res) => {
-    AuditLog.getRMErrorCount(req.params.start_date, req.params.end_date, (err, data) => {
+    AuditLog.getRMErrorCount(req.params.duration, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
                     errorCode: `404`,
-                    message: `Not found RM Audit Log with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Not found RM Audit Log with Duration ${req.params.duration}.`
                 });
             } else {
                 res.status(500).send({
                     errorCode: `500`,
-                    message: `Error retrieving RM Audit Log with Period ${req.params.start_date} to ${req.params.end_date}.`
+                    message: `Error retrieving RM Audit Log with Duration ${req.params.duration}.`
                 });
             }
         } else res.send(data);

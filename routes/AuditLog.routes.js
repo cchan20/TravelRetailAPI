@@ -11,14 +11,14 @@ module.exports = app => {
   app.get("/log/error/count/:start_date/to/:end_date", AuditLog.getErrorCount);
 
   // Get Error Count of HRM Demo by period
-  app.get("/log/error/count/hrm/:start_date/to/:end_date", AuditLog.getHRMErrorCount);
+  app.get("/log/error/count/hrm/:duration", AuditLog.getHRMErrorCount);
 
   // Get Error Count of Customer Service Demo by period
-  app.get("/log/error/count/cs/:start_date/to/:end_date", AuditLog.getCSErrorCount);
+  app.get("/log/error/count/cs/:duration", AuditLog.getCSErrorCount);
 
   // Get Error Count of Invoice Processing Demo by period
-  app.get("/log/error/count/am/:start_date/to/:end_date", AuditLog.getAMErrorCount);
+  app.get("/log/error/count/am/:duration", AuditLog.getAMErrorCount);
 
   // Get Error Count of Revenue Management Demo  by period
-  app.get("/log/error/count/rm/:start_date/to/:end_date", AuditLog.getRMErrorCount);
+  app.get("/log/error/count/rm/:duration", AuditLog.getRMErrorCount);
 };

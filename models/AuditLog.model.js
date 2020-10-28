@@ -69,8 +69,8 @@ AuditLog.getErrorCount = (start_date, end_date, result) => {
   });
 };
 
-AuditLog.getHRMErrorCount = (start_date, end_date, result) => {
-  sql.query(`SELECT IncidentManagementDemo.errorLog.*, a.* from IncidentManagementDemo.errorLog inner Join (SELECT  process_id, count(1) as "Count" from  HRMDemo.auditlog where HRMDemo.auditlog.status = 'Error' and HRMDemo.auditlog.created_date between "${start_date}" AND "${end_date}" group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
+AuditLog.getHRMErrorCount = (duration_time, result) => {
+  sql.query(`SELECT IncidentManagementDemo.errorLog.*, a.* from IncidentManagementDemo.errorLog inner Join (SELECT  process_id, count(1) as "Count" from  HRMDemo.auditlog where HRMDemo.auditlog.status = 'Error' and HRMDemo.auditlog.created_date >= now() - interval "${duration_time}" minute group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -88,8 +88,8 @@ AuditLog.getHRMErrorCount = (start_date, end_date, result) => {
   });
 };
 
-AuditLog.getCSErrorCount = (start_date, end_date, result) => {
-  sql.query(`SELECT IncidentManagementDemo.errorLog.*, a.* from IncidentManagementDemo.errorLog inner Join (SELECT  process_id, count(1) as "Count" from  CustomerServiceDemo.auditlog where CustomerServiceDemo.auditlog.status = 'Error' and CustomerServiceDemo.auditlog.created_date between "${start_date}" AND "${end_date}" group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
+AuditLog.getCSErrorCount = (duration_time, result) => {
+  sql.query(`SELECT IncidentManagementDemo.errorLog.*, a.* from IncidentManagementDemo.errorLog inner Join (SELECT  process_id, count(1) as "Count" from  CustomerServiceDemo.auditlog where CustomerServiceDemo.auditlog.status = 'Error' and CustomerServiceDemo.auditlog.created_date >= now() - interval "${duration_time}" minute group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -107,8 +107,8 @@ AuditLog.getCSErrorCount = (start_date, end_date, result) => {
   });
 };
 
-AuditLog.getAMErrorCount = (start_date, end_date, result) => {
-  sql.query(`SELECT IncidentManagementDemo.errorLog.*, a.* from IncidentManagementDemo.errorLog inner Join (SELECT  process_id, count(1) as "Count" from  InvoiceProcessingDemo.auditlog where InvoiceProcessingDemo.auditlog.status = 'Error' and InvoiceProcessingDemo.auditlog.created_date between "${start_date}" AND "${end_date}" group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
+AuditLog.getAMErrorCount = (duration_time, result) => {
+  sql.query(`SELECT IncidentManagementDemo.errorLog.*, a.* from IncidentManagementDemo.errorLog inner Join (SELECT  process_id, count(1) as "Count" from  InvoiceProcessingDemo.auditlog where InvoiceProcessingDemo.auditlog.status = 'Error' and InvoiceProcessingDemo.auditlog.created_date >= now() - interval "${duration_time}" minute group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -126,8 +126,8 @@ AuditLog.getAMErrorCount = (start_date, end_date, result) => {
   });
 };
 
-AuditLog.getRMErrorCount = (start_date, end_date, result) => {
-  sql.query(`SELECT IncidentManagementDemo.errorLog.*, a.* from IncidentManagementDemo.errorLog inner Join (SELECT  process_id, count(1) as "Count" from  RevenueManagement.auditlog where RevenueManagement.auditlog.status = 'Error' and RevenueManagement.auditlog.created_date between "${start_date}" AND "${end_date}" group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
+AuditLog.getRMErrorCount = (duration_time, result) => {
+  sql.query(`SELECT IncidentManagementDemo.errorLog.*, a.* from IncidentManagementDemo.errorLog inner Join (SELECT  process_id, count(1) as "Count" from  RevenueManagement.auditlog where RevenueManagement.auditlog.status = 'Error' and RevenueManagement.auditlog.created_date >= now() - interval "${duration_time}" minute group by  process_id) as a On IncidentManagementDemo.errorLog.processID=a.process_id`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
