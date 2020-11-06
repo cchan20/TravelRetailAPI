@@ -6,6 +6,9 @@ module.exports = app => {
   
     // Get log by period
     app.get("/trans/all", DemoTrans.getAll);
+
+    // End transaction
+    app.get("/trans/check/:demo_id", DemoTrans.demoEnable);
   
     // End transaction
     app.get("/trans/:trans_id/end", DemoTrans.endTrans);

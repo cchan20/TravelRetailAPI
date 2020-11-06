@@ -14,7 +14,7 @@ exports.startTrans = (req, res) => {
     trans_id: req.body.trans_id,
     demo_id: req.body.demo_id,
     status: "Started",
-    start_time: "CURRENT_TIMESTAMP",
+    start_time: "CURRENT_TIMESTAMP"
   });
 
   // Save Transaction Item in the database
@@ -40,21 +40,38 @@ exports.getAll = (req, res) => {
   });
 };
 
-// End a transaction
-exports.endTrans = (req, res) => {
-  DemoTrans.endTrans(req.params.trans_id, (err, data) => {
+// Find a Runnung demo count by demo ID
+exports.demoEnable = (req, res) => {
+  DemoTrans.demoEnable(req.params.demo_id, (err, data) => {
       if (err) {
           if (err.kind === "not_found") {
               res.status(404).send({
-                  errorCode: `404`,
-                  message: `Not found Transaction ID ${req.params.trans_id}.`
+                  message: `Not found Error Item with Demo ID ${req.params.demo_id}.`
               });
           } else {
               res.status(500).send({
-                  errorCode: `500`,
-                  message: `Error retrieving Transaction with ID ${req.params.trans_id}.`
+                  message: "Error retrieving Error Item with Demo ID " + req.params.demo_id
               });
           }
       } else res.send(data);
+  });
+};
+
+// End a transaction
+exports.endTrans = (req, res) => {
+  DemoTrans.endTrans(req.params.trans_id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          errorCode: `404`,
+          message: `Not found Transaction ID ${req.params.trans_id}.`
+        });
+      } else {
+        res.status(500).send({
+          errorCode: `500`,
+          message: `Error retrieving Transaction with ID ${req.params.trans_id}.`
+        });
+      }
+    } else res.send(data);
   });
 };

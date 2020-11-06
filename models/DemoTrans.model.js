@@ -9,7 +9,7 @@ const DemoTrans = function (request) {
     this.end_time = request.end_time;
 };
 
-DemoTrans.startTrans = result => {
+DemoTrans.startTrans = (newRequest, result) => {
     sql.query(`INSERT INTO demoTrans SET ?`, newRequest, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -41,6 +41,25 @@ DemoTrans.getAll = (result) => {
     });
 };
 
+DemoTrans.demoEnable = (demo_id, result) => {
+    sql.query(`SELECT COUNT(*) as running FROM IncidentManagementDemo.demoTrans WHERE demo_id = "${demo_id}" AND status = "Started"`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+  
+      if (res.length) {
+        console.log("found demo_id: ", res[0]);
+        result(null, res[0]);
+        return;
+      }
+  
+      // not found Error Item with the Log ID
+      result({ kind: "not_found" }, null);
+    });
+  };
+
 DemoTrans.endTrans = (tran_id, result) => {
     sql.query(`Update demoTrans SET end_time = CURRENT_TIMESTAMP WHERE trans_id = "${tran_id}"`, (err, res) => {
         if (err) {
@@ -59,3 +78,5 @@ DemoTrans.endTrans = (tran_id, result) => {
         result({ kind: "not_found" }, null);
     });
 };
+
+module.exports = DemoTrans;
