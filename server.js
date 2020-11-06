@@ -32,6 +32,9 @@ require("./routes/AuditLog.routes.js")(app);
 // Include routes of Demo Trans
 require("./routes/DemoTrans.routes.js")(app);
 
+// Include routes of SendEmail
+require("./routes/SendEmail.routes.js")(app);
+
 // set port, listen for requests
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
